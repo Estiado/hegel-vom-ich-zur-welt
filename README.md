@@ -10,7 +10,9 @@
 
 - GitHub：`Estiado/hegel-vom-ich-zur-welt`（私有源码）。
 - 已有私密演示：https://hegel-vom-ich-zur-welt.luckyfir11.chatgpt.site
-- Cloudflare公开部署：待完成账户连接。静态输出目录为 `dist`，无需构建命令。
+- Cloudflare Pages 公开网站：https://hegel-vom-ich-zur-welt.pages.dev/
+- Cloudflare Pages 配置：生产分支 `main`，框架预设“无”，构建命令留空，构建输出目录 `dist`。
+- 公开访问验证：2026-11-04，首页及全部 20 个发布文件均返回 HTTP 200，内容与仓库一致；此项检查不包含浏览器中的动效视觉测试。
 
 ## 操作
 
