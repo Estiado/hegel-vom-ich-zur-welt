@@ -150,12 +150,18 @@
       if (!scene.classList.contains('chapter') || top > h || top + height < 0) continue;
       const stage = $('.chapter-stage',scene), image = $('.art',scene), art = $('.art-window',scene), copy = $('.chapter-copy',scene), shade = $('.art-shade',scene);
       const p = clamp(-top / (height-h));
-      const expand = reduced ? 1 : smooth(.3,.92,p);
+      // 展开从进入本幕后不久即开始，贯穿大部分滚动区间：缓慢、渐进地放大到全屏
+      const expand = reduced ? 1 : smooth(.02,.85,p);
       const right = scene.dataset.side==='right', mobile=w<=640;
       const start = mobile ? [18,right?24:5,15,right?5:24] : [14,right?43:5,15,right?5:43];
       art.style.inset=start.map(n => (n*(1-expand)).toFixed(3)+'%').join(' ');
       art.style.borderRadius=(16*(1-expand)).toFixed(1)+'px';
-      image.style.transform=reduced?'none':`scale(${mix(1.1,1.02,expand)}) translateY(${mix(2,-2,p)}%)`;
+      // 边缘虚化：静止时轻微柔边，展开途中羽化最强（画面从暗色中柔和浮现），抵达全屏时归于干净
+      const soften = reduced ? 0 : Math.max(4*expand*(1-expand), .16*(1-expand));
+      art.style.setProperty('--edge-blur',(Math.min(w*.055,110)*soften).toFixed(1));
+      art.style.setProperty('--edge-soft',(Math.min(w*.011,18)*soften).toFixed(1));
+      // 让画面内容保持稳定，由窗口扩展主导"画面扩大"的观感
+      image.style.transform=reduced?'none':`scale(${mix(1.1,1.06,expand)}) translateY(${mix(2,-2,p)}%)`;
       shade.style.opacity=String(mobile?1:mix(.78,1,expand));
       copy.style.transform=`translateY(calc(-50% + ${reduced?0:mix(18,-28,p)}px))`;
       stage.style.setProperty('--chapter-progress',p);
