@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从我到世界 · Von mir zur Welt — 黑格尔四幕</title>
+<meta name="description" content="从我到世界——黑格尔四幕哲学导览：Jetzt 现在 · Anerkennung 承认 · Wirklichkeit 现实 · Geschichte 历史">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230c0a08'/%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-size='40' fill='%23c9a15e' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+/* ============================================================
+   从我到世界 · Von mir zur Welt — 黑格尔四幕
+   首屏：复刻视频一（巴洛克油画 · 体积光 · 呼吸光晕 · 视差）
+   动效体系：复刻视频二（渐显 + 上移 + 模糊消散 · 图文交替 · 背景缩放）
+   ============================================================ */
+:root{
+  --bg:#0c0a08;
+  --bg2:#0e0c09;
+  --ink:#efe9dc;
+  --muted:#a99e8a;
+  --faint:#7d7362;
+  --gold:#c9a15e;
+  --gold-bright:#ecd09a;
+  --line:rgba(201,161,94,.38);
+  --serif:"Playfair Display","Noto Serif SC",Georgia,serif;
+  --ease:cubic-bezier(.16,1,.3,1);          /* ease-out-expo */
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --nav-h:88px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:rgba(201,161,94,.35);color:#fff}
+img{display:block;max-width:none}
+a{color:inherit;text-decoration:none}
+
+/* ---------- 胶片颗粒 ---------- */
+.grain{
+  position:fixed;inset:-50%;z-index:60;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 9s steps(6) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}
+  60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,3%)}
+}
+
+/* ============================================================
+   导航（视频二：左标识 · 右菜单 · 当前项下划线）
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px clamp(22px,4.5vw,64px);
+  transition:background .5s ease,backdrop-filter .5s ease,padding .5s ease,border-color .5s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(11,9,7,.72);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  padding-top:14px;padding-bottom:14px;
+  border-bottom-color:rgba(201,161,94,.16);
+}
+.brand{display:flex;flex-direction:column;gap:5px;line-height:1}
+.brand-main{
+  font-size:clamp(17px,1.6vw,21px);font-weight:600;letter-spacing:.42em;
+  color:var(--ink);white-space:nowrap;
+}
+.brand-sub{
+  font-size:clamp(8px,.62vw,10px);letter-spacing:.32em;color:var(--faint);
+  text-transform:uppercase;white-space:nowrap;
+}
+.nav-menu{display:flex;align-items:center;gap:clamp(18px,2.4vw,38px)}
+.nav-menu a.menu-item{
+  font-size:12px;letter-spacing:.3em;color:var(--muted);
+  position:relative;padding:6px 2px;transition:color .3s ease;
+}
+.nav-menu a.menu-item::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--gold);transition:right .45s var(--ease);
+}
+.nav-menu a.menu-item:hover{color:var(--ink)}
+.nav-menu a.menu-item.active{color:var(--ink)}
+.nav-menu a.menu-item.active::after{right:0}
+.pill{
+  font-size:12px;letter-spacing:.3em;color:var(--gold-bright);
+  border:1px solid var(--line);border-radius:999px;
+  padding:10px 26px 10px 30px;white-space:nowrap;
+  transition:background .35s ease,color .35s ease,border-color .35s ease;
+}
+.pill:hover{background:rgba(201,161,94,.12);border-color:rgba(201,161,94,.65)}
+
+/* ============================================================
+   首屏 · 视频一第一幕复刻
+   巴洛克油画 · 雕像位置呼吸光晕 · 斜向体积光 · 尘埃 · 烟雾
+   ============================================================ */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#080604}
+.hero-bg-wrap{
+  position:absolute;inset:-6%;z-index:1;will-change:transform;
+}
+.hero-bg{
+  width:100%;height:100%;object-fit:cover;object-position:56% 42%;
+  filter:brightness(.92) saturate(1.02);
+  animation:kenburns 44s var(--ease-io) infinite alternate;
+  will-change:transform;
+}
+@keyframes kenburns{from{transform:scale(1.05)}to{transform:scale(1.15) translate(-1.2%,1%)}}
+#lightfx{
+  position:absolute;inset:0;z-index:3;width:100%;height:100%;
+  pointer-events:none;mix-blend-mode:screen;
+}
+.fog{
+  position:absolute;z-index:4;pointer-events:none;
+  border-radius:50%;filter:blur(60px);mix-blend-mode:screen;will-change:transform;
+}
+.fog-1{
+  width:70vw;height:46vh;left:-14vw;top:52%;
+  background:radial-gradient(closest-side,rgba(214,186,138,.13),transparent 70%);
+  animation:fogdrift 52s var(--ease-io) infinite alternate;
+}
+.fog-2{
+  width:56vw;height:40vh;right:-10vw;top:14%;
+  background:radial-gradient(closest-side,rgba(160,128,92,.10),transparent 70%);
+  animation:fogdrift 71s var(--ease-io) infinite alternate-reverse;
+}
+@keyframes fogdrift{from{transform:translateX(0)}to{transform:translateX(9vw)}}
+.hero-scrim{
+  position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:
+    linear-gradient(to bottom,rgba(8,6,4,.62) 0%,transparent 22%,transparent 62%,rgba(8,6,4,.78) 100%),
+    radial-gradient(120% 90% at 50% 46%,transparent 52%,rgba(8,6,4,.55) 100%);
+}
+.hero-title{
+  position:absolute;z-index:10;left:clamp(22px,5vw,72px);bottom:clamp(76px,13vh,150px);
+  will-change:transform,opacity;max-width:min(88vw,760px);
+}
+.hero-eyebrow{
+  font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;
+  font-size:clamp(17px,1.9vw,25px);letter-spacing:.14em;
+  color:var(--gold-bright);margin-bottom:clamp(14px,2.4vh,26px);
+  text-shadow:0 0 34px rgba(236,208,154,.4);
+}
+.hero-title h1{
+  font-weight:600;color:var(--ink);
+  font-size:clamp(2.35rem,7vw,5.9rem);
+  line-height:1.14;letter-spacing:.055em;
+  text-shadow:0 2px 60px rgba(0,0,0,.55),0 0 90px rgba(233,196,130,.16);
+}
+.hero-title h1 span{display:block}
+.hero-caption{
+  position:absolute;z-index:10;right:clamp(20px,3.4vw,48px);bottom:clamp(20px,3.4vh,34px);
+  font-size:10.5px;letter-spacing:.12em;color:rgba(169,158,138,.75);
+  text-align:right;line-height:1.9;max-width:34vw;
+}
+.hero-scroll{
+  position:absolute;z-index:10;left:50%;bottom:clamp(22px,4vh,40px);transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  font-size:10px;letter-spacing:.42em;color:var(--faint);
+  transition:opacity .5s ease;
+}
+.hero-scroll .stem{
+  width:1px;height:52px;background:linear-gradient(to bottom,transparent,rgba(201,161,94,.7),transparent);
+  position:relative;overflow:hidden;
+}
+.hero-scroll .stem::after{
+  content:"";position:absolute;left:-1.5px;top:-14px;width:4px;height:14px;border-radius:4px;
+  background:var(--gold-bright);
+  animation:drop 2.4s var(--ease-io) infinite;
+}
+@keyframes drop{0%{top:-16px;opacity:0}25%{opacity:1}85%{top:54px;opacity:0}100%{top:54px;opacity:0}}
+
+/* ---------- 统一入场系统（视频二：渐显·上移·模糊消散） ---------- */
+.reveal{
+  opacity:0;transform:translateY(46px) rotateX(5deg);filter:blur(12px);
+  transform-origin:50% 100%;perspective:800px;
+  transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);
+  transition-delay:calc(var(--i,0)*115ms);
+}
+.in .reveal,.reveal.in{opacity:1;transform:none;filter:blur(0)}
+
+/* ============================================================
+   四幕（视频二版式：全屏背景 · 图文左右交替 · 滚动缩放）
+   ============================================================ */
+.akt{
+  position:relative;min-height:100vh;overflow:hidden;
+  display:flex;align-items:center;
+  background:var(--bg2);
+}
+.akt[data-side="right"]{justify-content:flex-end}
+.akt-bg-wrap{position:absolute;inset:-8% 0;z-index:1;will-change:transform}
+.akt-bg{
+  width:100%;height:100%;object-fit:cover;
+  transform:scale(1.16);will-change:transform;
+  transition:filter 1.2s ease;
+}
+.akt-scrim{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(to right,
+    rgba(10,8,6,.88) 0%,rgba(10,8,6,.62) 34%,rgba(10,8,6,.16) 62%,rgba(10,8,6,.44) 100%),
+    linear-gradient(to bottom,rgba(10,8,6,.55),transparent 26%,transparent 74%,rgba(10,8,6,.62));
+}
+.akt[data-side="right"] .akt-scrim{
+  background:linear-gradient(to left,
+    rgba(10,8,6,.88) 0%,rgba(10,8,6,.62) 34%,rgba(10,8,6,.16) 62%,rgba(10,8,6,.44) 100%),
+    linear-gradient(to bottom,rgba(10,8,6,.55),transparent 26%,transparent 74%,rgba(10,8,6,.62));
+}
+.akt-inner{
+  position:relative;z-index:10;
+  width:min(92vw,1180px);margin:0 auto;
+  padding:calc(var(--nav-h) + 4vh) clamp(22px,4.5vw,64px) 9vh;
+}
+.akt[data-side="right"] .akt-inner{text-align:right}
+.akt[data-side="right"] .akt-inner>*{margin-left:auto}
+.akt-inner{--w:min(560px,46vw)}
+.akt-label{
+  font-size:11px;letter-spacing:.44em;color:var(--gold);
+  margin-bottom:clamp(18px,3vh,30px);white-space:nowrap;
+}
+.akt-title{margin-bottom:clamp(22px,3.6vh,36px)}
+.akt-title .de-big{
+  display:block;
+  font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;
+  font-size:clamp(3.2rem,8.4vw,6.8rem);line-height:1;letter-spacing:.015em;
+  color:var(--gold-bright);
+  text-shadow:0 0 70px rgba(233,196,130,.22);
+  margin-bottom:clamp(10px,1.8vh,18px);
+}
+.akt-title .zh{
+  display:block;font-weight:600;
+  font-size:clamp(1.35rem,2.9vw,2.15rem);letter-spacing:.14em;color:var(--ink);
+}
+.akt-body{max-width:var(--w);font-size:clamp(14.5px,1.16vw,16.5px);line-height:2.05;color:#cfc6b4}
+.akt-body p{margin-bottom:1.15em}
+.akt-body p:last-child{margin-bottom:0}
+.de{
+  font-family:"Playfair Display",Georgia,serif;font-style:italic;
+  color:var(--gold-bright);white-space:nowrap;
+}
+.akt-quote{
+  border-left:1px solid var(--line);
+  padding-left:clamp(16px,1.8vw,26px);
+  margin:clamp(20px,3vh,30px) 0 0;
+}
+.akt[data-side="right"] .akt-quote{border-left:none;border-right:1px solid var(--line);padding-left:0;padding-right:clamp(16px,1.8vw,26px)}
+.akt-quote .q-zh{
+  font-weight:600;font-size:clamp(15.5px,1.35vw,18.5px);letter-spacing:.06em;
+  color:var(--ink);line-height:1.9;
+}
+.akt-quote .q-de{
+  margin-top:10px;
+  font-family:"Playfair Display",Georgia,serif;font-style:italic;
+  font-size:clamp(12px,.98vw,14px);letter-spacing:.05em;color:var(--muted);line-height:1.8;
+}
+.akt-terms{
+  margin-top:clamp(22px,3.4vh,34px);
+  font-size:11.5px;letter-spacing:.16em;line-height:2.3;color:var(--faint);
+}
+.akt-terms b{color:var(--muted);font-weight:600}
+.akt-link{
+  display:inline-block;margin-top:clamp(26px,4vh,42px);
+  font-size:12px;letter-spacing:.34em;color:var(--ink);
+  padding-bottom:9px;position:relative;
+}
+.akt-link::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);
+  transform-origin:left;transition:background .4s ease;
+}
+.akt-link:hover::after{background:var(--gold-bright)}
+.akt-caption{
+  position:absolute;z-index:10;bottom:clamp(18px,3vh,30px);
+  font-size:10.5px;letter-spacing:.1em;color:rgba(169,158,138,.68);line-height:1.9;
+  left:clamp(22px,4.5vw,64px);max-width:40vw;
+}
+.akt[data-side="right"] .akt-caption{left:auto;right:clamp(22px,4.5vw,64px);text-align:right}
+
+/* ============================================================
+   尾页（视频二联系页复刻：纯黑 · 居中大字 · 底部小字）
+   ============================================================ */
+.ende{
+  position:relative;min-height:100vh;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#0a0806;text-align:center;
+}
+.ende-glow{
+  position:absolute;z-index:1;width:120vmin;height:120vmin;
+  background:radial-gradient(closest-side,rgba(214,178,112,.14),rgba(214,178,112,.05) 42%,transparent 70%);
+  animation:breathe 6.5s var(--ease-io) infinite alternate;
+  pointer-events:none;
+}
+@keyframes breathe{from{transform:scale(.94);opacity:.75}to{transform:scale(1.06);opacity:1}}
+.ende-inner{position:relative;z-index:10;padding:0 26px;max-width:1100px}
+.ende-label{
+  font-size:11px;letter-spacing:.5em;color:var(--gold);margin-bottom:clamp(30px,5vh,52px);
+}
+.ende-title .de-line{
+  display:block;
+  font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:500;
+  font-size:clamp(2rem,6.2vw,4.9rem);line-height:1.18;letter-spacing:.02em;
+  color:var(--gold-bright);
+  text-shadow:0 0 80px rgba(233,196,130,.28);
+  margin-bottom:clamp(20px,3.4vh,34px);
+}
+.ende-title .zh-line{
+  display:block;font-weight:600;letter-spacing:.3em;
+  font-size:clamp(1.35rem,3.4vw,2.3rem);color:var(--ink);
+}
+.ende-sub{
+  margin-top:clamp(34px,6vh,58px);
+  font-size:clamp(13.5px,1.15vw,16px);line-height:2.1;letter-spacing:.1em;color:var(--muted);
+  max-width:560px;margin-left:auto;margin-right:auto;
+}
+.ende-sub .de{font-size:.92em}
+.ende-footer{
+  position:absolute;z-index:10;left:0;right:0;bottom:clamp(24px,4.5vh,44px);
+  padding:0 26px;
+  font-size:10px;letter-spacing:.26em;line-height:2.2;color:var(--faint);
+}
+.ende-footer .sep{color:var(--gold);margin:0 .9em}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width:860px){
+  .nav-menu a.menu-item{display:none}
+  .nav{padding:18px 20px}
+  .brand-main{letter-spacing:.3em}
+  .hero-title{bottom:clamp(96px,17vh,140px)}
+  .hero-caption{display:none}
+  .akt-inner{padding:calc(var(--nav-h) + 6vh) 24px 12vh}
+  .akt-inner{--w:100%}
+  .akt-body{font-size:15px;line-height:2}
+  .akt-caption{max-width:62vw;font-size:9.5px}
+  .ende-footer{letter-spacing:.14em}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none;filter:none}
+  #lightfx{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ================= 导航 ================= -->
+<nav class="nav" id="nav" aria-label="主导航">
+  <a class="brand" href="#hero">
+    <span class="brand-main reveal" style="--i:0">从我到世界</span>
+    <span class="brand-sub reveal" style="--i:1">Hegel · 1770—1831 · 黑格尔四幕</span>
+  </a>
+  <div class="nav-menu">
+    <a class="menu-item reveal" style="--i:2" href="#akt1" data-sec="akt1">现在</a>
+    <a class="menu-item reveal" style="--i:3" href="#akt2" data-sec="akt2">承认</a>
+    <a class="menu-item reveal" style="--i:4" href="#akt3" data-sec="akt3">现实</a>
+    <a class="menu-item reveal" style="--i:5" href="#akt4" data-sec="akt4">历史</a>
+    <a class="pill reveal" style="--i:6" href="#akt1">开 讲</a>
+  </div>
+</nav>
+
+<!-- ================= 首屏 · 视频一第一幕 ================= -->
+<header class="hero" id="hero">
+  <div class="hero-bg-wrap" id="heroBgWrap">
+    <img class="hero-bg" src="img/hero.jpg" alt="帕尼尼式古典建筑随想曲，拱廊与雕像沐浴在光中">
+  </div>
+  <canvas id="lightfx" aria-hidden="true"></canvas>
+  <div class="fog fog-1" data-depth="26" aria-hidden="true"></div>
+  <div class="fog fog-2" data-depth="40" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <div class="hero-title" id="heroTitle">
+    <p class="hero-eyebrow reveal" style="--i:2">Von mir zur Welt</p>
+    <h1>
+      <span class="reveal" style="--i:3">我怎样</span>
+      <span class="reveal" style="--i:4">成为自由的</span>
+      <span class="reveal" style="--i:5">人？</span>
+    </h1>
+  </div>
+
+  <div class="hero-scroll" id="heroScroll" aria-hidden="true">
+    <span class="reveal" style="--i:7">向下滚动</span>
+    <span class="stem reveal" style="--i:7"></span>
+  </div>
+
+  <p class="hero-caption reveal" style="--i:8">乔瓦尼·保罗·帕尼尼《有雕像与古物的建筑随想曲》· 约1755–65<br>大都会艺术博物馆 · 公有领域</p>
+</header>
+
+<main>
+<!-- ================= 第一幕 · Jetzt ================= -->
+<section class="akt" id="akt1" data-side="left">
+  <div class="akt-bg-wrap"><img class="akt-bg" src="img/akt1.jpg" alt="卡卢斯《月光下的米尔克尔城堡》：夜色中的城堡与月亮" loading="lazy"></div>
+  <div class="akt-scrim" aria-hidden="true"></div>
+  <div class="akt-inner">
+    <p class="akt-label reveal" style="--i:0">第一幕 · ERSTER AKT</p>
+    <h2 class="akt-title">
+      <span class="de-big reveal" style="--i:1">Jetzt</span>
+      <span class="zh reveal" style="--i:2">我眼前的确定性</span>
+    </h2>
+    <div class="akt-body">
+      <p class="reveal" style="--i:3">「亲眼看、亲身感觉到的，总是最可靠。」——那么，把它写下来：<span class="de">„Jetzt ist Nacht“</span>，现在是夜晚。可到了白天，纸上的「现在」已经作废。现在一经说出，就在消逝；写下来的，已经是过去。</p>
+      <p class="reveal" style="--i:4">以为最直接的「看」，其实要靠语言与概念的中介 <span class="de">Vermittlung</span> 才说得出来。从这个最小、最有把握的词开始，「我」第一次暴露出裂缝——这是走向世界的第一步。</p>
+    </div>
+    <p class="akt-terms reveal" style="--i:5"><b>感性确定性</b> sinnliche Gewißheit · <b>现在</b> Jetzt · <b>中介</b> Vermittlung</p>
+    <a class="akt-link reveal" style="--i:6" href="#akt2">阅读下一幕 ↓</a>
+  </div>
+  <p class="akt-caption reveal" style="--i:7">卡尔·古斯塔夫·卡卢斯《月光下的米尔克尔城堡》· 约1833–35 · 大都会艺术博物馆</p>
+</section>
+
+<!-- ================= 第二幕 · Anerkennung ================= -->
+<section class="akt" id="akt2" data-side="right">
+  <div class="akt-bg-wrap"><img class="akt-bg" src="img/akt2.jpg" alt="弗里德里希《月下两人》：两人并肩眺望月亮" loading="lazy"></div>
+  <div class="akt-scrim" aria-hidden="true"></div>
+  <div class="akt-inner">
+    <p class="akt-label reveal" style="--i:0">第二幕 · ZWEITER AKT</p>
+    <h2 class="akt-title">
+      <span class="de-big reveal" style="--i:1">Anerkennung</span>
+      <span class="zh reveal" style="--i:2">我与你</span>
+    </h2>
+    <div class="akt-body">
+      <p class="reveal" style="--i:3">我不愿受别人支配，是否就意味着，我应该尽量不需要别人？欲望想消灭对象，而自我意识偏偏需要另一个自我意识：只有被另一个<b>独立的人</b>承认 <span class="de">Anerkennung</span>，我才成为独立的「我」。</p>
+      <p class="reveal" style="--i:4">主人与奴仆的辩证法：靠强迫得来的承认，恰恰不是承认。主人依赖奴仆的服侍，反而不独立；奴仆却在劳动 <span class="de">Arbeit</span> 与教化 <span class="de">Bildung</span> 中赢得自我确信。真正的独立，是彼此独立的人相互承认。</p>
+    </div>
+    <p class="akt-terms reveal" style="--i:5"><b>承认</b> Anerkennung · <b>主奴辩证法</b> Herrschaft und Knechtschaft · <b>劳动</b> Arbeit</p>
+    <a class="akt-link reveal" style="--i:6" href="#akt3">阅读下一幕 ↓</a>
+  </div>
+  <p class="akt-caption reveal" style="--i:7">卡斯帕·大卫·弗里德里希《月下两人》· 约1825–30 · 大都会艺术博物馆</p>
+</section>
+
+<!-- ================= 第三幕 · Wirklichkeit ================= -->
+<section class="akt" id="akt3" data-side="left">
+  <div class="akt-bg-wrap"><img class="akt-bg" src="img/akt3.jpg" alt="大卫《苏格拉底之死》" loading="lazy"></div>
+  <div class="akt-scrim" aria-hidden="true"></div>
+  <div class="akt-inner">
+    <p class="akt-label reveal" style="--i:0">第三幕 · DRITTER AKT</p>
+    <h2 class="akt-title">
+      <span class="de-big reveal" style="--i:1">Wirklichkeit</span>
+      <span class="zh reveal" style="--i:2">走进制度</span>
+    </h2>
+    <div class="akt-body">
+      <p class="reveal" style="--i:3">只停留在内心的道德，自由还只是「应当」。法，是自由意志的定在 <span class="de">Dasein des freien Willens</span>——自由需要制度，像需要空气：家庭、市民社会、国家。</p>
+      <p class="reveal" style="--i:4">抽象法 <span class="de">abstraktes Recht</span>、道德 <span class="de">Moralität</span>、伦理 <span class="de">Sittlichkeit</span>——自由不是摆脱一切规定，而是在扬弃 <span class="de">Aufheben</span> 中成为自己：保留它、提升它、克服它。</p>
+    </div>
+    <blockquote class="akt-quote reveal" style="--i:5">
+      <p class="q-zh">凡是合理的都是现实的，凡是现实的都是合理的。</p>
+      <p class="q-de">Was vernünftig ist, das ist wirklich; und was wirklich ist, das ist vernünftig.</p>
+    </blockquote>
+    <a class="akt-link reveal" style="--i:6" href="#akt4">阅读下一幕 ↓</a>
+  </div>
+  <p class="akt-caption reveal" style="--i:7">雅克-路易·大卫《苏格拉底之死》· 1787 · 大都会艺术博物馆</p>
+</section>
+
+<!-- ================= 第四幕 · Weltseele ================= -->
+<section class="akt" id="akt4" data-side="right">
+  <div class="akt-bg-wrap"><img class="akt-bg" src="img/akt4.jpg" alt="拿破仑翻越阿尔卑斯，仿大卫版画" loading="lazy"></div>
+  <div class="akt-scrim" aria-hidden="true"></div>
+  <div class="akt-inner">
+    <p class="akt-label reveal" style="--i:0">第四幕 · VIERTER AKT</p>
+    <h2 class="akt-title">
+      <span class="de-big reveal" style="--i:1">Weltseele</span>
+      <span class="zh reveal" style="--i:2">走进历史</span>
+    </h2>
+    <div class="akt-body">
+      <p class="reveal" style="--i:3">1806年10月13日，耶拿。黑格尔在窗外看见骑马的拿破仑——「我看见世界灵魂 <span class="de">Weltseele</span> 骑马穿过城市」；他怀里的《精神现象学》手稿，即将完成。</p>
+      <p class="reveal" style="--i:4">世界历史，是自由意识的前进 <span class="de">Fortschritt im Bewußtsein der Freiheit</span>。理性的狡计 <span class="de">List der Vernunft</span> 借个人的激情，成就超出个人的目的——而历史从不粉饰自己的苦难。</p>
+    </div>
+    <p class="akt-terms reveal" style="--i:5"><b>世界灵魂</b> Weltseele · <b>理性的狡计</b> List der Vernunft · <b>历史哲学</b> Philosophie der Geschichte</p>
+    <a class="akt-link reveal" style="--i:6" href="#ende">进入尾声 ↓</a>
+  </div>
+  <p class="akt-caption reveal" style="--i:7">《拿破仑翻越阿尔卑斯》仿大卫 · 阿尔丰斯·弗朗索瓦版画 1851 · 大都会艺术博物馆</p>
+</section>
+</main>
+
+<!-- ================= 尾页 · 视频二联系页复刻 ================= -->
+<footer class="ende" id="ende">
+  <div class="ende-glow" aria-hidden="true"></div>
+  <div class="ende-inner">
+    <p class="ende-label reveal" style="--i:0">尾声 · ENDE</p>
+    <h2 class="ende-title">
+      <span class="de-line reveal" style="--i:1">Das Wahre ist das Ganze.</span>
+      <span class="zh-line reveal" style="--i:2">真理是全体。</span>
+    </h2>
+    <p class="ende-sub reveal" style="--i:3">密涅瓦的猫头鹰，在黄昏起飞——<span class="de">Die Eule der Minerva beginnt erst mit der einbrechenden Dämmerung ihren Flug.</span><br>哲学对一个时代的理解，总在它结束之时。而这个关于自由的答案，仍在被写出。</p>
+  </div>
+  <div class="ende-footer">
+    <span class="reveal" style="--i:4">从我到世界 · VON MIR ZUR WELT</span><span class="sep reveal" style="--i:5">·</span><span class="reveal" style="--i:5">横跨《精神现象学》《法哲学原理》与历史哲学</span><span class="sep reveal" style="--i:6">·</span><span class="reveal" style="--i:6">GEORG WILHELM FRIEDRICH HEGEL 1770—1831</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   动效引擎
+   一、首屏光追层（视频一）：斜向体积光 + 呼吸光晕 + 尘埃
+   二、视差（视频一）：鼠标多层视差 + 滚动视差
+   三、入场系统（视频二）：渐显 · 上移 · 模糊消散 · 错峰
+   四、背景滚动缩放（视频二）：图片随滚动放大至满屏
+   ============================================================ */
+(function(){
+"use strict";
+var reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+var lerp = function(a,b,t){ return a + (b-a)*t; };
+var clamp = function(v,a,b){ return Math.max(a,Math.min(b,v)); };
+
+/* ---------- 一、光追层 ---------- */
+var cv = document.getElementById("lightfx");
+if(cv && !reduceMotion){
+  var ctx = cv.getContext("2d");
+  var DPR = Math.min(devicePixelRatio || 1, 1.5);
+  var W = 0, H = 0;
+  function sizeCanvas(){
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  sizeCanvas();
+  addEventListener("resize", sizeCanvas);
+
+  /* 光心：画面中下偏右（雕像群所在） */
+  var GLOW = { x: 0.585, y: 0.635 };
+  /* 三道斜向体积光：自左上射向光心（沿拱廊纵深） */
+  var rays = [
+    { ox: 0.16, oy: -0.08, spread: 0.000, w: 0.150, ph: 0.0 },
+    { ox: 0.05, oy: -0.12, spread: 0.075, w: 0.095, ph: 2.1 },
+    { ox: 0.30, oy: -0.10, spread:-0.060, w: 0.075, ph: 4.2 }
+  ];
+  /* 尘埃 */
+  var dust = [], DUST_N = 85;
+  for(var i=0;i<DUST_N;i++){
+    dust.push({
+      x: Math.random(), y: Math.random(),
+      vx: (0.008 + Math.random()*0.02) * 60,   /* px/s，向右上漂 */
+      vy: -(0.004 + Math.random()*0.012) * 60,
+      r: 0.5 + Math.random()*1.8,
+      tw: Math.random()*Math.PI*2,
+      ts: 0.6 + Math.random()*1.8
+    });
+  }
+  var t0 = performance.now(), running = true;
+
+  /* 仅首屏可见时渲染 */
+  new IntersectionObserver(function(es){
+    running = es[0].isIntersecting;
+  },{threshold:0}).observe(document.getElementById("hero"));
+
+  function beam(ox, oy, ang, halfW, alpha){
+    var len = Math.hypot(W*(GLOW.x-ox), H*(GLOW.y-oy)) * 1.35;
+    ctx.save();
+    ctx.translate(ox*W, oy*H);
+    ctx.rotate(ang);
+    var g = ctx.createLinearGradient(0,0,len,0);
+    g.addColorStop(0,   "rgba(240,208,145," + alpha.toFixed(4) + ")");
+    g.addColorStop(0.55,"rgba(224,182,115," + (alpha*0.42).toFixed(4) + ")");
+    g.addColorStop(1,   "rgba(200,150,80,0)");
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.moveTo(0, -halfW*0.22);
+    ctx.lineTo(len, -halfW);
+    ctx.lineTo(len,  halfW);
+    ctx.lineTo(0,   halfW*0.22);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+  function frame(now){
+    requestAnimationFrame(frame);
+    if(!running || !W) return;
+    var t = (now - t0)/1000;
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation = "lighter";
+
+    var gx = GLOW.x*W, gy = GLOW.y*H;
+
+    /* 呼吸光晕（多层正弦 + 烛光颤动） */
+    var breathe = 1 + 0.07*Math.sin(t*1.35) + 0.035*Math.sin(t*0.52+1.7);
+    var flick   = 0.02*Math.sin(t*7.3) + 0.014*Math.sin(t*11.1+0.8);
+    var R = Math.min(W,H) * 0.46 * breathe;
+    var a0 = 0.30 + 0.09*Math.sin(t*1.35+0.6) + flick;
+    var g = ctx.createRadialGradient(gx,gy,0,gx,gy,R);
+    g.addColorStop(0,   "rgba(236,205,142," + clamp(a0,0,1).toFixed(4) + ")");
+    g.addColorStop(0.30,"rgba(210,168,102," + (a0*0.34).toFixed(4) + ")");
+    g.addColorStop(0.62,"rgba(160,118,62,"  + (a0*0.10).toFixed(4) + ")");
+    g.addColorStop(1,   "rgba(120,80,30,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,W,H);
+
+    /* 白热核心 */
+    var rc = Math.min(W,H) * 0.085 * breathe;
+    var gc = ctx.createRadialGradient(gx,gy,0,gx,gy,rc);
+    gc.addColorStop(0,  "rgba(255,241,208," + (0.55+flick*4).toFixed(4) + ")");
+    gc.addColorStop(0.5,"rgba(244,220,166,0.20)");
+    gc.addColorStop(1,  "rgba(233,196,130,0)");
+    ctx.fillStyle = gc;
+    ctx.fillRect(0,0,W,H);
+
+    /* 体积光束 */
+    rays.forEach(function(r){
+      var baseAng = Math.atan2(GLOW.y - r.oy, GLOW.x - r.ox) + r.spread;
+      var ang = baseAng + 0.028*Math.sin(t*0.31 + r.ph);
+      var alpha = 0.085 + 0.05*Math.sin(t*0.43 + r.ph*1.3) + 0.018*Math.sin(t*1.7 + r.ph);
+      beam(r.ox, r.oy, ang, W*r.w*0.5, clamp(alpha,0.015,0.16));
+    });
+
+    /* 光束中的尘埃 */
+    dust.forEach(function(p){
+      p.x += p.vx/W; p.y += p.vy/H;
+      p.tw += p.ts/60;
+      if(p.x>1.02) p.x=-0.02; if(p.y<-0.02) p.y=1.02;
+      if(p.x<-0.02) p.x=1.02; if(p.y>1.02) p.y=-0.02;
+      var tw = 0.5 + 0.5*Math.sin(p.tw);
+      ctx.beginPath();
+      ctx.arc(p.x*W, p.y*H, p.r, 0, Math.PI*2);
+      ctx.fillStyle = "rgba(240,215,160," + (0.10 + 0.38*tw).toFixed(4) + ")";
+      ctx.fill();
+    });
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- 二、视差 ---------- */
+var heroBgWrap = document.getElementById("heroBgWrap");
+var heroTitle  = document.getElementById("heroTitle");
+var fogs = document.querySelectorAll(".fog");
+var mx = 0, my = 0, tx = 0, ty = 0;
+if(!reduceMotion){
+  addEventListener("mousemove", function(e){
+    tx = (e.clientX / innerWidth  - 0.5) * 2;   /* -1 .. 1 */
+    ty = (e.clientY / innerHeight - 0.5) * 2;
+  }, {passive:true});
+}
+
+/* ---------- 三、入场系统（IntersectionObserver） ---------- */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){
+      en.target.classList.add("in");
+      io.unobserve(en.target);
+    }
+  });
+},{threshold: 0.18, rootMargin: "0px 0px -6% 0px"});
+document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+/* ---------- 导航状态 + 当前幕高亮（视频二下划线） ---------- */
+var nav = document.getElementById("nav");
+var menuItems = document.querySelectorAll(".menu-item");
+var sections = ["hero","akt1","akt2","akt3","akt4","ende"].map(function(id){return document.getElementById(id);});
+var secObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){
+      var id = en.target.id;
+      menuItems.forEach(function(a){
+        a.classList.toggle("active", a.dataset.sec === id);
+      });
+    }
+  });
+},{threshold: 0.45});
+sections.forEach(function(s){ if(s) secObserver.observe(s); });
+
+/* ---------- 四、滚动驱动：视差 + 背景缩放 ---------- */
+var akts = document.querySelectorAll(".akt");
+var heroEl = document.getElementById("hero");
+var heroScrollEl = document.getElementById("heroScroll");
+var ticking = false;
+function onScroll(){
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(function(){
+    ticking = false;
+    if(reduceMotion) return;
+    var sy = scrollY;
+
+    /* 导航背景 */
+    nav.classList.toggle("scrolled", sy > 40);
+
+    /* 首屏滚动视差 + 渐隐 */
+    if(sy < innerHeight * 1.2){
+      heroBgWrap.style.transform = "translateY(" + (sy*0.24) + "px) translate(" + (-mx*10) + "px," + (-my*6) + "px)";
+      heroTitle.style.transform = "translateY(" + (sy*-0.14) + "px) translate(" + (mx*7) + "px," + (my*4) + "px)";
+      heroTitle.style.opacity = clamp(1 - sy/(innerHeight*0.72), 0, 1);
+      heroScrollEl.style.opacity = clamp(1 - sy/(innerHeight*0.3), 0, 1);
+      fogs.forEach(function(f){
+        var d = parseFloat(f.dataset.depth || 24);
+        f.style.transform = "translate(" + (-mx*d) + "px," + (sy*0.1 - my*d*0.6) + "px)";
+      });
+    }
+
+    /* 四幕背景：随滚动从放大态收拢至满屏（视频二：图片放大铺满） */
+    akts.forEach(function(sec){
+      var r = sec.getBoundingClientRect();
+      var vh = innerHeight;
+      if(r.bottom < -vh*0.2 || r.top > vh*1.2) return;
+      var p = clamp((vh - r.top) / (vh + r.height), 0, 1) * 2 - 0.5; /* 大致 0..1，居中时约 0.5 */
+      var img = sec.querySelector(".akt-bg");
+      var s = 1.16 - 0.15 * clamp(p,0,1);
+      var y = (0.5 - clamp(p,0,1)) * r.height * 0.10;
+      img.style.transform = "scale(" + s.toFixed(4) + ") translateY(" + y.toFixed(1) + "px)";
+    });
+  });
+}
+addEventListener("scroll", onScroll, {passive:true});
+
+/* 鼠标视差缓动循环 */
+if(!reduceMotion){
+  (function mouseLoop(){
+    requestAnimationFrame(mouseLoop);
+    mx = lerp(mx, tx, 0.045);
+    my = lerp(my, ty, 0.045);
+    if(scrollY < innerHeight){
+      heroBgWrap.style.transform = "translateY(" + (scrollY*0.24) + "px) translate(" + (-mx*10) + "px," + (-my*6) + "px)";
+    }
+  })();
+}
+})();
+</script>
+</body>
+</html>

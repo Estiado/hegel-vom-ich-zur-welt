@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10100f">
+  <meta name="description" content="从我到世界。以四幕影像，走近黑格尔关于认识、承认、自由与历史的追问。">
+  <title>从我到世界 · Vom Ich zur Welt</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preload" href="assets/fonts/display.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/hero-arcade.webp" as="image">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#akt1">进入第一幕</a>
+  <header class="site-header">
+    <a class="brand" href="#hero" aria-label="从我到世界，回到首页">从我到世界<span>G. W. F. HEGEL</span></a>
+    <nav class="chapter-nav" aria-label="章节导航">
+      <a href="#akt1" lang="de">Jetzt</a>
+      <a href="#akt2" lang="de">Anerkennung</a>
+      <a href="#akt3" lang="de">Wirklichkeit</a>
+      <a href="#akt4" lang="de">Weltseele</a>
+    </nav>
+    <button class="menu-toggle" aria-label="展开章节导航" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16"/></svg></button>
+    <a class="begin" href="#akt1">进入四幕 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+  </header>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="移动端章节" hidden>
+    <a href="#akt1">I <span lang="de">Jetzt</span><small>现在</small></a>
+    <a href="#akt2">II <span lang="de">Anerkennung</span><small>承认</small></a>
+    <a href="#akt3">III <span lang="de">Wirklichkeit</span><small>现实</small></a>
+    <a href="#akt4">IV <span lang="de">Weltseele</span><small>历史</small></a>
+    <a href="#ende">V <span lang="de">Das Ganze</span><small>尾声</small></a>
+  </nav>
+
+  <main>
+    <section class="hero scene" id="hero" aria-label="首页：从我到世界">
+      <div class="hero-art fallback-light" aria-hidden="true">
+        <img src="assets/hero-arcade.webp" class="hero-fallback" alt="" width="1672" height="941" fetchpriority="high">
+        <canvas id="light-scene"></canvas>
+        <canvas id="dust"></canvas>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <h1 class="hero-title" lang="de" aria-label="Vom Ich zur Welt"><span class="line"><span>Vom Ich</span></span><span class="line"><span>zur Welt</span></span></h1>
+      <div class="hero-note">
+        <blockquote lang="de">„So ist auch die Philosophie ihre Zeit in Gedanken erfaßt.“</blockquote>
+        <p class="quote-zh">哲学，是它的时代在思想中的把握。</p>
+        <cite>黑格尔 ·《法哲学原理》序言</cite>
+      </div>
+      <a class="scroll-cue" href="#akt1" aria-label="向下进入第一幕"><span>SCROLL TO EXPLORE</span><svg viewBox="0 0 24 36" aria-hidden="true"><path d="M12 2v29M5 24l7 7 7-7"/></svg></a>
+      <p class="hero-credit">1770 — 1831 <span>GEORG WILHELM FRIEDRICH HEGEL</span></p>
+    </section>
+
+    <section class="chapter scene" id="akt1" data-side="left" aria-labelledby="title-now">
+      <div class="chapter-stage">
+        <div class="art-window"><img class="art manuscript-art" src="assets/phenom-1807-title.webp" srcset="assets/phenom-1807-title-small.webp 960w, assets/phenom-1807-title.webp 1618w" sizes="(max-width: 640px) 120vw, 100vw" alt="《精神现象学》1807年版扉页：德文书名与作者姓名" width="1618" height="2400" loading="lazy"><div class="art-shade"></div></div>
+        <div class="chapter-copy">
+          <h2 id="title-now" class="chapter-title"><span class="line"><span lang="de">Jetzt</span></span><span class="chinese line"><span>现在</span></span></h2>
+          <p class="thesis reveal">最直接的确信，<br>也需要关系与中介。</p>
+          <div class="terms reveal"><span lang="de">sinnliche Gewissheit</span><span lang="de">Vermittlung</span></div>
+          <p class="micro-thought reveal" lang="de">„Das Jetzt ist die Nacht.“</p>
+          <a class="chapter-next reveal" href="#akt2">走向另一个我 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+        </div>
+        <button class="art-credit" data-source="phenomenology">《精神现象学》· 1807年版扉页 <span>图像来源 ↗</span></button>
+        <span class="expand-cue" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15m-5-5 5 5 5-5"/></svg><span>展开影像</span><i></i></span>
+        <span class="act-marker" aria-hidden="true">I — 感性确定性</span>
+      </div>
+    </section>
+
+    <section class="chapter scene" id="akt2" data-side="right" aria-labelledby="title-recognition">
+      <div class="chapter-stage">
+        <div class="art-window"><img class="art" src="assets/two-men.webp" srcset="assets/two-men-small.webp 960w, assets/two-men.webp 2400w" sizes="(max-width: 640px) 120vw, 100vw" alt="弗里德里希的《两人观月》：两个人并肩望向月亮" width="2400" height="1942" loading="lazy"><div class="art-shade"></div></div>
+        <div class="chapter-copy">
+          <h2 id="title-recognition" class="chapter-title long"><span class="line"><span lang="de">Anerkennung</span></span><span class="chinese line"><span>承认</span></span></h2>
+          <p class="thesis reveal">我的独立，<br>需要另一个独立的人。</p>
+          <div class="terms reveal"><span lang="de">Herrschaft und Knechtschaft</span><span lang="de">Arbeit · Bildung</span></div>
+          <p class="micro-thought reveal">强迫服从，无法完成相互承认。</p>
+          <a class="chapter-next reveal" href="#akt3">让自由成为现实 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+        </div>
+        <button class="art-credit" data-source="two-men">C. D. Friedrich ·《两人观月》· 约1825—1830 <span>图像来源 ↗</span></button>
+        <span class="expand-cue" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15m-5-5 5 5 5-5"/></svg><span>展开影像</span><i></i></span>
+        <span class="act-marker" aria-hidden="true">II — 自我意识</span>
+      </div>
+    </section>
+
+    <section class="chapter scene" id="akt3" data-side="left" aria-labelledby="title-actuality">
+      <div class="chapter-stage">
+        <div class="art-window"><img class="art declaration-art" src="assets/declaration.webp" srcset="assets/declaration-small.webp 960w, assets/declaration.webp 1704w" sizes="(max-width: 640px) 120vw, 100vw" alt="1789年《人权和公民权宣言》的绘画呈现，文字上方为象征自由的形象" width="1704" height="2160" loading="lazy"><div class="art-shade"></div></div>
+        <div class="chapter-copy">
+          <h2 id="title-actuality" class="chapter-title"><span class="line"><span lang="de">Wirklichkeit</span></span><span class="chinese line"><span>现实</span></span></h2>
+          <p class="thesis reveal">自由，需要在共同生活中<br>获得稳定的形式。</p>
+          <div class="terms reveal"><span lang="de">Recht · Moralität · Sittlichkeit</span><span lang="de">aufheben</span></div>
+          <p class="micro-thought reveal">一种制度的现存，还不足以证明它合理。</p>
+          <a class="chapter-next reveal" href="#akt4">走进历史 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+        </div>
+        <button class="art-credit" data-source="declaration">《人权和公民权宣言》· 1789 <span>图像来源 ↗</span></button>
+        <span class="expand-cue" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15m-5-5 5 5 5-5"/></svg><span>展开影像</span><i></i></span>
+        <span class="act-marker" aria-hidden="true">III — 自由的制度</span>
+      </div>
+    </section>
+
+    <section class="chapter scene" id="akt4" data-side="right" aria-labelledby="title-history">
+      <div class="chapter-stage">
+        <div class="art-window"><img class="art battle-art" src="assets/napoleon-alps.webp" srcset="assets/napoleon-alps-small.webp 960w, assets/napoleon-alps.webp 1897w" sizes="(max-width: 640px) 120vw, 100vw" alt="1851年《拿破仑翻越阿尔卑斯山》版画，画面中拿破仑骑着骡子在山路上前行" width="1897" height="2400" loading="lazy"><div class="art-shade"></div></div>
+        <div class="chapter-copy">
+          <h2 id="title-history" class="chapter-title"><span class="line"><span lang="de">Weltseele</span></span><span class="chinese line"><span>世界之魂</span></span></h2>
+          <p class="thesis reveal">在个人的激情中，<br>理解自由意识的历史。</p>
+          <div class="terms reveal"><span lang="de">die List der Vernunft</span><span lang="de">Freiheit · Geschichte</span></div>
+          <p class="micro-thought reveal">理解历史，也追问：谁的代价？</p>
+          <a class="chapter-next reveal" href="#ende">在黄昏中回望 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+        </div>
+        <button class="art-credit" data-source="jena">A. François ·《拿破仑翻越阿尔卑斯山》· 1851 <span>图像来源 ↗</span></button>
+        <span class="expand-cue" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15m-5-5 5 5 5-5"/></svg><span>展开影像</span><i></i></span>
+        <span class="act-marker" aria-hidden="true">IV — 耶拿，1806</span>
+      </div>
+    </section>
+
+    <section class="epilogue scene" id="ende" aria-labelledby="title-whole">
+      <img class="epilogue-art" src="assets/schinkel.webp" srcset="assets/schinkel-small.webp 960w, assets/schinkel.webp 2400w" sizes="(max-width: 640px) 120vw, 100vw" alt="申克尔1813年的《水边的哥特式大教堂》：教堂与城市映在水边的暮光中" width="2400" height="1804" loading="lazy">
+      <div class="epilogue-shade"></div>
+      <div class="epilogue-copy">
+        <h2 id="title-whole" lang="de"><span class="line"><span>Das Wahre</span></span><span class="line"><span>ist das Ganze.</span></span></h2>
+        <p class="whole-zh reveal">真理是全体。</p>
+        <p class="owl reveal" lang="de">Die Eule der Minerva beginnt erst mit der<br class="desktop-break"> einbrechenden Dämmerung ihren Flug.</p>
+        <p class="owl-zh reveal">密涅瓦的猫头鹰，在黄昏降临时才起飞。</p>
+        <a class="return-link reveal" href="#hero">回到最初的追问 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a>
+      </div>
+      <button class="art-credit" data-source="schinkel">K. F. Schinkel ·《水边的哥特式大教堂》· 1813 <span>图像来源 ↗</span></button>
+      <span class="closing-note" lang="de">Vielen Dank.</span>
+    </section>
+  </main>
+
+  <aside class="presentation-tools" aria-label="演示控制">
+    <button id="motion-toggle" aria-label="减弱动效" aria-pressed="false" title="减弱动效"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg></button>
+    <span class="page-counter" aria-live="polite"><span id="page-current">01</span><span class="counter-rule"></span>06</span>
+    <button id="previous" aria-label="上一幕" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
+    <button id="next" aria-label="下一幕"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
+  </aside>
+  <div class="source-drawer" id="source-drawer" role="dialog" aria-modal="true" aria-labelledby="source-panel-title" hidden>
+    <div class="source-heading"><h2 id="source-panel-title">影像与文本</h2><button id="close-sources" aria-label="关闭来源说明"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div id="source-detail"></div>
+    <p class="source-context">四幕是主题导览，横跨《精神现象学》《法哲学原理》与历史哲学。画作作为理解入口，相关使用属于视觉诠释。</p>
+  </div>
+  <noscript><style>.line>span,.reveal{opacity:1!important;transform:none!important}.chapter{height:100svh}.art-window{inset:0!important}.art{filter:brightness(.45)}.chapter-copy{opacity:1!important}</style></noscript>
+</body>
+</html>
