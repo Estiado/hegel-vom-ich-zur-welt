@@ -8,6 +8,10 @@
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   let reduced = preference.matches;
   const scenes = $$('.scene'), chapters = $$('.chapter');
+  // 自动展开参数：进入本幕（画面钉住）后延迟 AUTO_DELAY 秒开始，用 AUTO_DURATION 秒缓慢放大到全屏；
+  // 滚离本幕时用 AUTO_COLLAPSE 秒收回，可反复重播。展开不再由滚动进度驱动。
+  const AUTO_DELAY=.55, AUTO_DURATION=4.6, AUTO_COLLAPSE=1.1;
+  const expandClock=new Map();
   let current = 0, dirty = true, previousTime = 0, heroOnscreen = true;
   const pointer = {x:.5, y:.68, targetX:.5, targetY:.68, moved:false};
   const hero = $('#hero'), header = $('.site-header');
@@ -150,8 +154,9 @@
       if (!scene.classList.contains('chapter') || top > h || top + height < 0) continue;
       const stage = $('.chapter-stage',scene), image = $('.art',scene), art = $('.art-window',scene), copy = $('.chapter-copy',scene), shade = $('.art-shade',scene);
       const p = clamp(-top / (height-h));
-      // 展开从进入本幕后不久即开始，贯穿大部分滚动区间：缓慢、渐进地放大到全屏
-      const expand = reduced ? 1 : smooth(.02,.85,p);
+      // 展开进度来自自动播放的时钟（进入本幕后开始计时），与滚动位置解耦
+      const elapsed = expandClock.get(scene) || 0;
+      const expand = reduced ? 1 : smooth(0,1,(elapsed-AUTO_DELAY)/AUTO_DURATION);
       const right = scene.dataset.side==='right', mobile=w<=640;
       const start = mobile ? [18,right?24:5,15,right?5:24] : [14,right?43:5,15,right?5:43];
       art.style.inset=start.map(n => (n*(1-expand)).toFixed(3)+'%').join(' ');
@@ -164,7 +169,7 @@
       image.style.transform=reduced?'none':`scale(${mix(1.1,1.06,expand)}) translateY(${mix(2,-2,p)}%)`;
       shade.style.opacity=String(mobile?1:mix(.78,1,expand));
       copy.style.transform=`translateY(calc(-50% + ${reduced?0:mix(18,-28,p)}px))`;
-      stage.style.setProperty('--chapter-progress',p);
+      stage.style.setProperty('--chapter-progress',expand.toFixed(4));
     }
     if (!reduced) {
       const scroll = clamp(scrollY/h);
@@ -238,11 +243,27 @@
     if(gl){gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2f(uniforms.resolution,canvas.width,canvas.height);gl.uniform2f(uniforms.imageSize,...textureSize);}
     dustWidth=innerWidth;dustHeight=innerHeight;dustCanvas.width=Math.round(dustWidth*dpr);dustCanvas.height=Math.round(dustHeight*dpr);dustContext?.setTransform(dpr,0,0,dpr,0,0);
   }
+  // 自动展开时钟：本幕画面钉住于视口时前进（展开），离开时快速倒退（收回）
+  let expanding=false;
+  function advanceExpansion(dt) {
+    expanding=false;
+    const h=innerHeight;
+    for(const scene of chapters){
+      const rect=scene.getBoundingClientRect();
+      const pinned=rect.top<=1&&rect.bottom>=h-1;
+      const elapsed=expandClock.get(scene)||0;
+      const next=pinned
+        ?Math.min(elapsed+dt,AUTO_DELAY+AUTO_DURATION)
+        :Math.max(elapsed-dt*((AUTO_DELAY+AUTO_DURATION)/AUTO_COLLAPSE),0);
+      if(next!==elapsed){expandClock.set(scene,next);expanding=true;}
+    }
+  }
   function render(now) {
     requestAnimationFrame(render);
     if(document.hidden)return;
     const dt=Math.min((now-(previousTime||now))/1000,.05);previousTime=now;
-    if(dirty)updateScroll();
+    if(!reduced)advanceExpansion(dt);
+    if(dirty||expanding)updateScroll();
     if(!heroOnscreen||reduced)return;
     const t=now/1000;
     if(!pointer.moved){pointer.targetX=.5+Math.sin(t*.24)*.16;pointer.targetY=.57+Math.sin(t*.19)*.13;}
