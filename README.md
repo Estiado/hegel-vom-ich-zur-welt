@@ -1,6 +1,6 @@
 # 从我到世界 · Vom Ich zur Welt
 
-一份用于黑格尔课堂讲述的七幕影像网页：首页 → Jetzt → Das Wahre → Anerkennung → Wirklichkeit → Weltseele → 尾声。
+一份用于黑格尔课堂讲述的六幕影像网页：首页 → Jetzt → Das Wahre → Anerkennung → Wirklichkeit → 尾声。
 
 ## 运行
 
@@ -34,7 +34,6 @@
 - 内容依据用户提供的《从我到世界》四幕讲稿；网页只保留关键词与中心判断。
 - 第二幕「Das Wahre ist das Ganze／真理是全体」为增补页：取《精神现象学》序言的“花蕾—花朵—果实”比喻，兼收“歌德未读完序言”的轶事；配图为 Fantin-Latour《花果静物》（大都会博物馆 1980.3）。
 - 《精神现象学》为1807年**印刷本扉页**，不是黑格尔亲笔手稿。
-- 第四幕采用《拿破仑翻越阿尔卑斯山》1851年版画，作拿破仑时代的视觉入口，不冒称耶拿战役图。
 - 《水边的哥特式大教堂》用于尾声；尾声主句为“密涅瓦的猫头鹰”（《法哲学原理》序言）。演示控制条位于左下角，便于讲者立于屏幕左侧授课。
 - 历史图像与来源见 [docs/historical-assets.json](docs/historical-assets.json) 和 [docs/asset-research.md](docs/asset-research.md)。字体OFL许可证随文件附在 `dist/assets/fonts/`。
 

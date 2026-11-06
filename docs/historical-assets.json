@@ -80,24 +80,6 @@
     "use_note": "This is the official P708 painting, 115×86.5cm, and may differ from other versions circulating online. Printed declaration text was affixed to the painted canvas."
   },
   {
-    "id": "jena",
-    "title": "The Battle of Jena, October 14, 1806",
-    "author": "Horace Vernet",
-    "date": "1836",
-    "kind": "later history painting depicting the battle of 1806",
-    "source_url": "https://commons.wikimedia.org/wiki/File:E.Jean.Horace.Vernet.Battleof.Jena1836.jpg",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/E.Jean.Horace.Vernet.Battleof.Jena1836.jpg",
-    "width": 2000,
-    "height": 1407,
-    "mime_type": "image/jpeg",
-    "license": "Public domain / PD-Art; author died1863",
-    "credit": "Horace Vernet, Bataille d’Iéna, 14 octobre 1806, 1836. Musée de l’Histoire de France, Versailles (MV2768). Public-domain reproduction via Wikimedia Commons.",
-    "local_path": null,
-    "download_status": "blocked: HTTP403 from Wikimedia image host",
-    "use_note": "Caption must distinguish 1806 event from painting created1836. Official French POP record says its own RMN photograph requires permission; use Commons copy’s declared PD-Art status instead of claiming every museum photo is CC0.",
-    "verification_ref": "turn16view0"
-  },
-  {
     "id": "schinkel",
     "title": "Gothic Cathedral by the Water / Gotischer Dom am Wasser",
     "author": "Karl Friedrich Schinkel",
