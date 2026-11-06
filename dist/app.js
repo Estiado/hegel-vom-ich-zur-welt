@@ -72,7 +72,7 @@
     if (['ArrowRight','ArrowDown','PageDown'].includes(e.key)) {e.preventDefault();navigate(current + 1);}
     if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key)) {e.preventDefault();navigate(current - 1);}
     if (e.key === 'Home') {e.preventDefault();navigate(0);}
-    if (e.key === 'End') {e.preventDefault();navigate(5);}
+    if (e.key === 'End') {e.preventDefault();navigate(6);}
   });
   function setReduced(value) {
     reduced = value;
@@ -92,6 +92,7 @@
 
   const sourceData = {
     phenomenology: {title:'Phänomenologie des Geistes',caption:'G. W. F. Hegel · 1807年，班贝格／维尔茨堡',detail:'《精神现象学》的早期印刷书页。第一幕参照“感性确定性”，第二幕参照“自我意识的独立性与依赖性”。这是印刷本，非亲笔稿。',credit:'历史文本公有领域。扫描来源见原件页面。',url:'https://digital.staatsbibliothek-berlin.de/werkansicht?PPN=PPN816955166'},
+    fantin: {title:'Still Life with Flowers and Fruit',caption:'Henri Fantin-Latour · 1866',detail:'《花果静物》。花蕾、盛放的花朵与果实同在一幅静物里，作为《精神现象学》序言“花蕾—花朵—果实”比喻的视觉诠释。画作与黑格尔文本并无直接关联。',credit:'The Metropolitan Museum of Art · 1980.3 · Open Access / Public Domain',url:'https://www.metmuseum.org/art/collection/search/436293'},
     'two-men': {title:'Two Men Contemplating the Moon',caption:'Caspar David Friedrich · 约1825—1830',detail:'《两人观月》。两个人共同面向世界，作为“承认与关系”的视觉入口；画作本身不描绘黑格尔的主奴论证。',credit:'The Metropolitan Museum of Art · 2000.51 · Open Access / Public Domain',url:'https://www.metmuseum.org/art/collection/search/438417'},
     declaration: {title:'Déclaration des droits de l’homme',caption:'Jean-Jacques-François Le Barbier · 约1789',detail:'《人权和公民权宣言》的绘画呈现，用于第三幕关于普遍自由如何获得具体制度形式的讨论。',credit:'Paris Musées / Musée Carnavalet · P708 · CC0',url:'https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/declaration-des-droits-de-l-homme-et-du-citoyen-5'},
     jena: {title:'Napoleon Crossing the Alps',caption:'Alphonse François，依据 Paul Delaroche · 1851',detail:'《拿破仑翻越阿尔卑斯山》版画，作为拿破仑时代的视觉入口，描绘阿尔卑斯山题材，并非耶拿现场。黑格尔于1806年10月13日的信中称拿破仑为Weltseele，世界之魂。',credit:'The Metropolitan Museum of Art · 49.40.177 · Public Domain',url:'https://www.metmuseum.org/art/collection/search/339867'},
@@ -147,7 +148,7 @@
     const selected = geometry.findLastIndex(s => s.top < h * .5);
     current = Math.max(0,selected);
     $('#page-current').textContent = String(current + 1).padStart(2,'0');
-    previous.disabled=current===0;next.disabled=current===5;
+    previous.disabled=current===0;next.disabled=current===6;
     header.classList.toggle('scrolled',current>0);
     $$('.chapter-nav a').forEach(a => {if (a.hash==='#'+scenes[current].id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
     for (const {scene,top,height} of geometry) {

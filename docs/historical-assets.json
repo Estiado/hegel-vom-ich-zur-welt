@@ -136,5 +136,23 @@
     "verification_ref": "turn25search0",
     "verification_file": "/workspace/scratch/a7b47fc8941c/asset-research/met-napoleon-object.json",
     "use_note": "Historical illustration of Napoleon crossing the Alps, not a picture of the Battle of Jena. Use as a broader Napoleonic-history visual; preserve exact caption."
+  },
+  {
+    "id": "fantin-still-life",
+    "title": "Still Life with Flowers and Fruit",
+    "author": "Henri Fantin-Latour",
+    "date": "1866",
+    "kind": "oil on canvas; visual interpretation for the Phenomenology preface bud-blossom-fruit metaphor, not a Hegel document",
+    "source_url": "https://www.metmuseum.org/art/collection/search/436293",
+    "image_url": "https://images.metmuseum.org/CRDImages/ep/original/DT1980.jpg",
+    "width": 3074,
+    "height": 3722,
+    "mime_type": "image/jpeg",
+    "license": "Public Domain; The Metropolitan Museum of Art Open Access; API isPublicDomain=true",
+    "credit": "Henri Fantin-Latour, Still Life with Flowers and Fruit, 1866. The Metropolitan Museum of Art, Purchase, Mr. and Mrs. Richard J. Bernhard Gift, by exchange, 1980 (1980.3). Public Domain.",
+    "optimized_width": 2400,
+    "optimized_height": 2906,
+    "download_status": "downloaded from Met Open Access; decoded, optimized WebP",
+    "use_note": "Used on the added second act (Das Wahre ist das Ganze / 真理是全体) as a visual companion to the bud–blossom–fruit passage of the Phenomenology preface. The painting has no direct connection to Hegel or his text; caption keeps this distinction."
   }
 ]

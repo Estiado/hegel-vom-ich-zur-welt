@@ -28,7 +28,7 @@ class Page(HTMLParser):
     if u.scheme or u.netloc:errors.append('External runtime dependency: '+v)
     else:self.assets.append(v)
 p=Page();p.feed((dist/'index.html').read_text())
-if p.scenes!=['hero','akt1','akt2','akt3','akt4','ende']:errors.append('Six-scene order mismatch')
+if p.scenes!=['hero','akt1','vorrede','akt2','akt3','akt4','ende']:errors.append('Seven-scene order mismatch')
 if p.h1!=1:errors.append('Expected one h1')
 if len(p.ids)!=len(set(p.ids)):errors.append('Duplicate element ID')
 for a in p.anchors:
