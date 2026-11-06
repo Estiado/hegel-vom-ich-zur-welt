@@ -96,7 +96,7 @@
     'two-men': {title:'Two Men Contemplating the Moon',caption:'Caspar David Friedrich · 约1825—1830',detail:'《两人观月》。两个人共同面向世界，作为“承认与关系”的视觉入口；画作本身不描绘黑格尔的主奴论证。',credit:'The Metropolitan Museum of Art · 2000.51 · Open Access / Public Domain',url:'https://www.metmuseum.org/art/collection/search/438417'},
     declaration: {title:'Déclaration des droits de l’homme',caption:'Jean-Jacques-François Le Barbier · 约1789',detail:'《人权和公民权宣言》的绘画呈现，用于第三幕关于普遍自由如何获得具体制度形式的讨论。',credit:'Paris Musées / Musée Carnavalet · P708 · CC0',url:'https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/declaration-des-droits-de-l-homme-et-du-citoyen-5'},
     jena: {title:'Napoleon Crossing the Alps',caption:'Alphonse François，依据 Paul Delaroche · 1851',detail:'《拿破仑翻越阿尔卑斯山》版画，作为拿破仑时代的视觉入口，描绘阿尔卑斯山题材，并非耶拿现场。黑格尔于1806年10月13日的信中称拿破仑为Weltseele，世界之魂。',credit:'The Metropolitan Museum of Art · 49.40.177 · Public Domain',url:'https://www.metmuseum.org/art/collection/search/339867'},
-    schinkel: {title:'Gotischer Dom am Wasser',caption:'Karl Friedrich Schinkel · 1813',detail:'《水边的哥特式大教堂》。以暮色、城市与水面作为尾声的视觉诠释。猫头鹰引文出自《法哲学原理》序言；“真理是全体”出自《精神现象学》序言。',credit:'Staatliche Museen zu Berlin / Alte Nationalgalerie · Foto: Jörg P. Anders · Public Domain Mark 1.0',url:'https://search.smb.museum/object/obj-958640'}
+    schinkel: {title:'Gotischer Dom am Wasser',caption:'Karl Friedrich Schinkel · 1813',detail:'《水边的哥特式大教堂》。以暮色、城市与水面作为尾声的视觉诠释。猫头鹰引文出自《法哲学原理》序言；“真理是全体”见第二幕（《精神现象学》序言）。',credit:'Staatliche Museen zu Berlin / Alte Nationalgalerie · Foto: Jörg P. Anders · Public Domain Mark 1.0',url:'https://search.smb.museum/object/obj-958640'}
   };
   function openDrawer(id, trigger) {
     const data = sourceData[id]; if (!data) return;
